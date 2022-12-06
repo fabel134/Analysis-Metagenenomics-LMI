@@ -1,2 +1,2 @@
 # Rotacion_LMI
-Scripts e imagenes que se utlizaron durante la rotacion en el Laboratorio de Interacciones Microbianas (LIM)
+Scripts que se utlizaron durante los analisis bioinformaticos de la rotacion en el Laboratorio de Interacciones Microbianas (LIM)

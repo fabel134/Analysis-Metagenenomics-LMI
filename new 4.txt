@@ -1,0 +1,12 @@
+##Notas para fer
+Al parecer los reads que se leyeron no se pueden
+ensamblar me dice que los reads estan bien
+por alguna razon.
+
+LP21 no corrio con megahit
+LP6 
+
+##Voy a correr el script con los parametros de la pagina de Metegenomica.
+##Trimming
+
+##Ensamble

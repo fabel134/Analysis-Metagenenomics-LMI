@@ -1,0 +1,18 @@
+ 94.87	74	74	U	0	unclassified
+  5.13	4	0	R	1	root
+  3.85	3	0	D	3	  Bacteria
+  1.28	1	0	P	1385	    Chloroflexi
+  1.28	1	1	C	1428	      Dehalococcoidia
+  1.28	1	0	P	1500	    Cyanobacteria
+  1.28	1	0	C	44560	      Cyanobacteriia
+  1.28	1	0	O	44562	        Cyanobacteriales
+  1.28	1	0	F	44576	          Coleofasciculaceae
+  1.28	1	1	G	44577	            Caldora VP642b
+  1.28	1	0	P	2375	    Proteobacteria
+  1.28	1	0	C	2379	      Alphaproteobacteria
+  1.28	1	1	O	46126	        AT-s3-44
+  1.28	1	0	D	2	  Archaea
+  1.28	1	0	P	55	    Euryarchaeota
+  1.28	1	0	C	199	      Methanopyri
+  1.28	1	0	O	200	        Methanopyrales
+  1.28	1	1	F	201	          Methanopyraceae

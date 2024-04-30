@@ -1,0 +1,12 @@
+ 77.88	81	81	U	0	unclassified
+ 22.12	23	0	R	1	root
+ 22.12	23	2	D	3	  Bacteria
+ 20.19	21	4	P	1385	    Chloroflexi
+  8.65	9	9	C	1428	      Dehalococcoidia
+  4.81	5	0	C	1450	      Ktedonobacteria
+  2.88	3	3	O	1452	        B12-WMSP1
+  1.92	2	2	O	1451	        B10-SB3A
+  2.88	3	0	C	1411	      Chloroflexia
+  2.88	3	0	O	1413	        Chloroflexales
+  2.88	3	0	F	1422	          Roseiflexaceae
+  2.88	3	3	G	1423	            Roseiflexus

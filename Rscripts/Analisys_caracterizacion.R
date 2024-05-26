@@ -8,6 +8,23 @@ library(viridis)
 library(dplyr)
 library(forcats)
 
+#Choose all setting to plots
+tema=theme(axis.text.x = element_text(color="black",size=12, angle=0,hjust=0.5,vjust=1.5, family = "sans" ),
+           #axis.text.x = element_text(color="black",size=12, angle=90,hjust=0.5,vjust=1.5),
+           axis.text.y = element_text(color="black",size=12, vjust = 1.5, family = "sans"),
+           axis.title = element_text(color="black",size=12, face = "bold", family = "sans"),
+           axis.title.x.bottom = element_blank(),
+           panel.border =element_rect(color = "black", fill = NA),#element_blank(),
+           strip.text.x = element_text(size=12, color="black",face="bold", family = "sans"),
+           strip.text.y = element_text(size=12, color="black",face="bold", family = "sans"),
+           strip.placement = "outside", strip.background = element_rect(fill = "white"), 
+           panel.background = element_rect(fill = "white",colour = "white",size = 0.8, linetype = "solid"),
+           panel.grid.major.y = element_blank(),panel.grid.minor.x = element_blank(),
+           legend.position = "right", legend.text = element_text(color = "black",size=12, family = "sans"), 
+           legend.direction = "vertical", legend.title = element_text(color = "black",size=12, face = "bold", family = "sans"),
+           legend.key.size = unit(0.4,"cm"))
+
+
 #Import data
 setwd("~/LIM/CF_AM")
 
@@ -84,8 +101,8 @@ ggplot(k, aes(x=reorder(Tratamiento,`Altura (cm)`), y=`Altura (cm)`,fill=reorder
 ############################# Plot largo hoja_ solo tratamientos ################################
 ##usamos reorder para ordenar ascendentemente
 ggplot(k, aes(x=reorder(Tratamiento,`Altura (cm)`), y=`Altura (cm)`,fill=reorder(Tratamiento,`Altura (cm)`))) + 
-  geom_boxplot(aes(fill=Tratamiento))+
-  scale_fill_manual(values = c("#024AAC","#1DACA8","#10B62F","#E2E41C","#F48F06","#F2252C","#D140B7"))+
+  geom_boxplot(outlier.size = 0, aes(fill=Tratamiento))+
+  scale_fill_manual(values = c("#000000","#EB73B3","#F64971","#F8B620","#21B087","#2CB5C0"))+
   #geom_boxplot(outlier.size = 0)+ ##delete outliers
   #geom_dotplot(binaxis='y', stackdir='center'
   #                           ,stackratio=0.7, dotsize=0.4,position=position_dodge())+
@@ -101,7 +118,7 @@ ggplot(k, aes(x=reorder(Tratamiento,`Altura (cm)`), y=`Altura (cm)`,fill=reorder
     #scale_fill_viridis(alpha = 0.7, begin = 0, end = 0.9, direction = 1,
     #                 discrete = T, option = "H")+
   geom_jitter(aes(colour = Muestreo),shape=16, position=position_jitter(0.2))+
-   scale_color_manual(values = c("T0"="gray100","T6"="gray80","T12"="gray50","T18"="gray30"))
+   scale_color_manual(values = c("T0"="gray80","T6"="gray60","T12"="gray40","T18"="gray30"))+ tema
  
 
 
@@ -168,11 +185,11 @@ ggplot(k, aes(x=reorder(Tratamiento,`Grosor (cm)`), y=`Grosor (cm)`,fill=reorder
                      discrete = T, option = "D")+
   facet_wrap(~ Muestreo)
 
-############################# Plot largo hoja_ solo tratamientos ################################
+############################# Plot grosor hoja_ solo tratamientos ################################
 ##usamos reorder para ordenar ascendentemente
 ggplot(k, aes(x=reorder(Tratamiento,`Grosor (cm)`), y=`Grosor (cm)`,fill=reorder(Tratamiento,`Grosor (cm)`))) + 
-  geom_boxplot(aes(fill=Tratamiento))+
-  scale_fill_manual(values = c("#024AAC","#1DACA8","#10B62F","#E2E41C","#F48F06","#F2252C","#D140B7"))+
+  geom_boxplot(outlier.size = 0, aes(fill=Tratamiento))+
+  scale_fill_manual(values = c("#000000","#EB73B3","#F64971","#F8B620","#21B087","#2CB5C0"))+
   #geom_boxplot(outlier.size = 0)+ ##delete outliers
   #geom_dotplot(binaxis='y', stackdir='center'
   #                           ,stackratio=0.7, dotsize=0.4,position=position_dodge())+
@@ -188,7 +205,7 @@ ggplot(k, aes(x=reorder(Tratamiento,`Grosor (cm)`), y=`Grosor (cm)`,fill=reorder
   #scale_fill_viridis(alpha = 0.7, begin = 0, end = 0.9, direction = 1,
   #                 discrete = T, option = "H")+
   geom_jitter(aes(colour = Muestreo),shape=16, position=position_jitter(0.2))+
-  scale_color_manual(values = c("T0"="gray100","T6"="gray80","T12"="gray50","T18"="gray30"))
+  scale_color_manual(values = c("T0"="gray80","T6"="gray60","T12"="gray40","T18"="gray30"))+ tema
 
 
 ##### Grosor por muestreo ####
@@ -246,6 +263,29 @@ ggplot(k, aes(x=reorder(Tratamiento,`No. de Hojas`), y=`No. de Hojas`,fill=reord
   scale_fill_viridis(alpha = 1, begin = 0, end = 0.92, direction = -1,
                      discrete = T, option = "D")+
   facet_wrap (~ df$Muestreo)
+
+############################# Plot No. de hojas solo tratamientos ################################
+##usamos reorder para ordenar ascendentemente
+
+ggplot(k, aes(x=reorder(Tratamiento,`No. de Hojas`), y= `No. de Hojas`,fill=reorder(Tratamiento,`No. de Hojas`))) + 
+  geom_boxplot(outlier.size = 0, aes(fill=Tratamiento))+
+  scale_fill_manual(values = c("#000000","#EB73B3","#F64971","#F8B620","#21B087","#2CB5C0"))+
+  #geom_boxplot(outlier.size = 0)+ ##delete outliers
+  #geom_dotplot(binaxis='y', stackdir='center'
+  #                           ,stackratio=0.7, dotsize=0.4,position=position_dodge())+
+  labs(title = substitute(bold(paste('Foliar area of six months ',italic('A. marmorata'),
+                                     ' plants all time and conditions.'))),
+       subtitle = "Kruskal-Wallis chi-squared = 11.833, df = 5, p-value = 0.03715", x = "Treatment",
+       y="Number of leaves",fill="Treatment")+
+  theme(text = element_text(size = 11, face = "plain",family = "Gill_Sans_MT"),##Todo el texto
+        strip.text.x = element_text(size = 10, face = "bold",hjust = 0.5), ##Texto de titulos de graficos
+        plot.title = element_text(hjust = 0, size = 12),
+        plot.title.position = "plot",
+        plot.subtitle = element_text(hjust = 0, size = 11))+
+  #scale_fill_viridis(alpha = 0.7, begin = 0, end = 0.9, direction = 1,
+  #                 discrete = T, option = "H")+
+  geom_jitter(aes(colour = Muestreo),shape=16, position=position_jitter(0.2))+
+  scale_color_manual(values = c("T0"="gray80","T6"="gray60","T12"="gray40","T18"="gray30"))+tema
 
 ### numero de hojas por muestreo ##
 

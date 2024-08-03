@@ -100,16 +100,17 @@ ggplot(k, aes(x=reorder(Tratamiento,`Altura (cm)`), y=`Altura (cm)`,fill=reorder
 
 ############################# Plot largo hoja_ solo tratamientos ################################
 ##usamos reorder para ordenar ascendentemente
-ggplot(k, aes(x=reorder(Tratamiento,`Altura (cm)`), y=`Altura (cm)`,fill=reorder(Tratamiento,`Altura (cm)`))) + 
+A1 <- ggplot(k, aes(x=reorder(Tratamiento,`Altura (cm)`), y=`Altura (cm)`,fill=reorder(Tratamiento,`Altura (cm)`))) + 
   geom_boxplot(outlier.size = 0, aes(fill=Tratamiento))+
+  #geom_bar(stat = "identity", position = "dodge", width = 0.8) +
   scale_fill_manual(values = c("#000000","#EB73B3","#F64971","#F8B620","#21B087","#2CB5C0"))+
   #geom_boxplot(outlier.size = 0)+ ##delete outliers
   #geom_dotplot(binaxis='y', stackdir='center'
   #                           ,stackratio=0.7, dotsize=0.4,position=position_dodge())+
-  labs(title = substitute(bold(paste('Foliar area of six months ',italic('A. marmorata'),
-                                     ' plants all time and conditions.'))),
+  labs(title = substitute(bold(paste('Phenotypic characterization ',italic('A. marmorata'),
+                                     ' all time and conditions.'))),
        subtitle = "Kruskal-Wallis chi-squared = 39.082, df = 5, p-value = 2.287e-07", x = "Treatment",
-       y="Length (cm²)",fill="Treatment")+
+       y="Length (cm)",fill="Treatment")+
   theme(text = element_text(size = 11, face = "plain",family = "Gill_Sans_MT"),##Todo el texto
         strip.text.x = element_text(size = 10, face = "bold",hjust = 0.5), ##Texto de titulos de graficos
         plot.title = element_text(hjust = 0, size = 12),
@@ -119,13 +120,14 @@ ggplot(k, aes(x=reorder(Tratamiento,`Altura (cm)`), y=`Altura (cm)`,fill=reorder
     #                 discrete = T, option = "H")+
   geom_jitter(aes(colour = Muestreo),shape=16, position=position_jitter(0.2))+
    scale_color_manual(values = c("T0"="gray80","T6"="gray60","T12"="gray40","T18"="gray30"))+ tema
- 
-
+A1 
+#ggsave(filename = "fig_feno/largo_marmorata.png", plot = A1, width = 20, height = 14, dpi = 300, units = "cm")
 
 ########################### Plot Muestreo ###############################
 
 ggplot(k, aes(x = Muestreo, y = `Altura (cm)`, fill = Muestreo, `Altura (cm)`)) + ##usamos reorder para ordenar ascendentemente
-  geom_boxplot()+
+  #geom_boxplot()+
+  geom_bar(stat = "identity", position = "dodge", width = 0.8) +
   #geom_dotplot(binaxis='y', stackdir='center'
   #                           ,stackratio=0.7, dotsize=0.4,position=position_dodge())+
   geom_jitter(shape=16, position=position_jitter(0.2))+
@@ -187,13 +189,14 @@ ggplot(k, aes(x=reorder(Tratamiento,`Grosor (cm)`), y=`Grosor (cm)`,fill=reorder
 
 ############################# Plot grosor hoja_ solo tratamientos ################################
 ##usamos reorder para ordenar ascendentemente
-ggplot(k, aes(x=reorder(Tratamiento,`Grosor (cm)`), y=`Grosor (cm)`,fill=reorder(Tratamiento,`Grosor (cm)`))) + 
+A2 <- ggplot(k, aes(x=reorder(Tratamiento,`Grosor (cm)`), y=`Grosor (cm)`,fill=reorder(Tratamiento,`Grosor (cm)`))) + 
+  #geom_bar(stat = "identity", position = "dodge", width = 0.8) +
   geom_boxplot(outlier.size = 0, aes(fill=Tratamiento))+
   scale_fill_manual(values = c("#000000","#EB73B3","#F64971","#F8B620","#21B087","#2CB5C0"))+
   #geom_boxplot(outlier.size = 0)+ ##delete outliers
   #geom_dotplot(binaxis='y', stackdir='center'
   #                           ,stackratio=0.7, dotsize=0.4,position=position_dodge())+
-  labs(title = substitute(bold(paste('Foliar area of six months ',italic('A. marmorata'),
+  labs(title = substitute(bold(paste('Phenotypic characterization ',italic('A. marmorata'),
                                      ' plants all time and conditions.'))),
        subtitle = "Kruskal-Wallis chi-squared = 21.107, df = 5, p-value = 0.0007732", x = "Treatment",
        y="Leaf width (cm)",fill="Treatment")+
@@ -206,7 +209,8 @@ ggplot(k, aes(x=reorder(Tratamiento,`Grosor (cm)`), y=`Grosor (cm)`,fill=reorder
   #                 discrete = T, option = "H")+
   geom_jitter(aes(colour = Muestreo),shape=16, position=position_jitter(0.2))+
   scale_color_manual(values = c("T0"="gray80","T6"="gray60","T12"="gray40","T18"="gray30"))+ tema
-
+A2
+ggsave(filename = "fig_feno/ancho_marmorata.png", plot = A2, width = 20, height = 14, dpi = 300, units = "cm")
 
 ##### Grosor por muestreo ####
 
@@ -267,7 +271,8 @@ ggplot(k, aes(x=reorder(Tratamiento,`No. de Hojas`), y=`No. de Hojas`,fill=reord
 ############################# Plot No. de hojas solo tratamientos ################################
 ##usamos reorder para ordenar ascendentemente
 
-ggplot(k, aes(x=reorder(Tratamiento,`No. de Hojas`), y= `No. de Hojas`,fill=reorder(Tratamiento,`No. de Hojas`))) + 
+A3 <- ggplot(k, aes(x=reorder(Tratamiento,`No. de Hojas`), y= `No. de Hojas`,fill=reorder(Tratamiento,`No. de Hojas`))) + 
+  #geom_bar(stat = "identity", position = "dodge", width = 0.8) +
   geom_boxplot(outlier.size = 0, aes(fill=Tratamiento))+
   scale_fill_manual(values = c("#000000","#EB73B3","#F64971","#F8B620","#21B087","#2CB5C0"))+
   #geom_boxplot(outlier.size = 0)+ ##delete outliers
@@ -286,6 +291,9 @@ ggplot(k, aes(x=reorder(Tratamiento,`No. de Hojas`), y= `No. de Hojas`,fill=reor
   #                 discrete = T, option = "H")+
   geom_jitter(aes(colour = Muestreo),shape=16, position=position_jitter(0.2))+
   scale_color_manual(values = c("T0"="gray80","T6"="gray60","T12"="gray40","T18"="gray30"))+tema
+
+A3
+ggsave(filename = "fig_feno/hojas_marmorata.png", plot = A3, width = 20, height = 14, dpi = 300, units = "cm")
 
 ### numero de hojas por muestreo ##
 

@@ -15,25 +15,22 @@ fasta=c("otus.fasta")[1]
   # Set PARAMETERS
 amplicon=c("16s","ITS")[1]
 #bootstrap=0.80 #not implemented yet
-#filter=500 #minimum read count for a valid sample
-filter=1 #minimum read count for a valid sample
+filter=1000 #minimum read count for a valid sample #victor analisys
 data=c("abel","nestor", "all")[1]  #what sub sample would you need
 rm.na=FALSE #remove unclassified sequences, not implemented yet but could be an option
 
 if ( amplicon == "16s"){
   setwd("~/abel/analysis/16s_analy/result")
   taxa=c(rdp="otus.sintax.rdp",silva="sotus.sintax",green="otus.sintax.green")[2]
-  #mr=7 #minimum read count for abundant OTUs
-  mr=1 #minimum read count for abundant OTUs
-  ms=5 #minim sample frequency for abundant OTUs
-  #ms=1 #minim sample frequency for abundant OTUs
-  nr=2 #maximum read count for contaminant OTUs
+  mr=10 #minimum read count for abundant OTUs
+  ms=5 #minim sample frequency for abundant OTUs 
+  nr=7 #maximum read count for contaminant OTUs
   ns=2 #maximum sample frequency for contaminant OTUs 
 } else if ( amplicon == "ITS" ){ 
   setwd("~/abel/analysis/FITS_analy/result") 
   #taxa=c(rdp="otus.sintax.rdp", unite="otus.sintax", uniteall="otus.sintax.uniteall")[2]
   taxa=unite="otus.sintax.uniteall"
-    mr=2 #minimum read count for abundant OTUs
+  mr=2 #minimum read count for abundant OTUs
   ms=5 #minim sample frequency for abundant OTUs 
   nr=2 #maximum read count for contaminant OTUs
   ns=2 #maximum sample frequency for contaminant OTUs 
@@ -92,7 +89,7 @@ sum(rowSums(otu[n,]))/ sum(total) *100 # Percentage reads contaminants
 
 if ( amplicon == "16s"){
   e=unique(c(sintax[grep("Eukaryota",sintax$domain),"otu.id"],sintax[grep("Mitochondria",sintax$family), "otu.id"]))
-  c=sintax[grep("Chloroplast",sintax$class),"otu.id"]
+  c=sintax[grep("Chloroplast",sintax$order),"otu.id"]
 
   print(paste("Chloroplast", length(c), "OTUs"))
   print(sum(rowSums(otu[c,])) / sum(total) *100)
@@ -262,8 +259,8 @@ fasta=c("otus.fasta")[1]
 
 # Set PARAMETERS
 amplicon=c("16s","ITS")[2]
-bootstrap=0.80 #not implemented yet
-filter=500 #minimum read count for a valid sample
+#bootstrap=0.80 #not implemented yet
+filter=1000 #minimum read count for a valid sample
 data=c("abel","nestor", "all")[1]  #what sub sample would you need
 rm.na=FALSE #remove unclassified sequences, not implemented yet but could be an option
 
@@ -278,7 +275,7 @@ if ( amplicon == "16s"){
   setwd("~/abel/analysis/FITS_analy/result") 
   taxa=c(rdp="otus.sintax.rdp", unite="otus.sintax", uniteall="otus.sintax.uniteall")[3]
   mr=2 #minimum read count for abundant OTUs
-  ms=1 #minimum sample frequency for abundant OTUs 
+  ms=5 #minim sample frequency for abundant OTUs 
   nr=2 #maximum read count for contaminant OTUs
   ns=2 #maximum sample frequency for contaminant OTUs 
 }
@@ -313,7 +310,6 @@ meta=meta[order(meta$ID_seq_ITS),] #order samples
 # Load SEQUENCES
 seq=readDNAStringSet(paste(getwd(),fasta,sep = "/"))
 names(seq)=gsub("OTU","OTU_",names(seq)) #change names
-
 # FILTERING SAMPLES
 total=colSums(otu) #calculate total read per sample 
 
@@ -528,6 +524,7 @@ writeXStringSet(kell,
 write.table(tax,
             file=paste(getwd(),paste("taxa.table.AMF",data,names(taxa),"txt",sep = "."),sep = "/"),
             quote = F, col.names = T, row.names = T, sep = "\t")
+
 #OBTAINF OTUS DE Neophaeosphaeria agave
 library(Biostrings)
 neo = readDNAStringSet("otus.abel.fasta")
@@ -537,10 +534,22 @@ writeXStringSet(neo,
                 file=paste(getwd(),paste("otus","neo","fasta",sep = "."),sep = "/"),
                 format = "fasta")
 
-write.table(tax,
+write.table(taxneo,
             file=paste(getwd(),paste("taxa.table.AMF",data,names(taxa),"txt",sep = "."),sep = "/"),
             quote = F, col.names = T, row.names = T, sep = "\t")
 
+#OBTAINF OTUS DE AMF for Nestor Analysis
+library(Biostrings)
+AMF = readDNAStringSet("otus.abel.fasta")
+taxAMF= subset(taxas, taxas$phylum =="p:Glomeromycota", select= c("domain","phylum","class","order","family","genus","otu.id"))
+AMF=AMF[rownames(taxAMF),]
+writeXStringSet(AMF, 
+                file=paste(getwd(),paste("otus","AMF","fasta",sep = "."),sep = "/"),
+                format = "fasta")
+
+write.table(taxAMF,
+            file=paste(getwd(),paste("taxa.table.AMF",data,names(taxa),"txt",sep = "."),sep = "/"),
+            quote = F, col.names = T, row.names = T, sep = "\t")
 
 #OBTAIN OTUS UNIDENTIFIED
 taxas$domain[is.na(taxas$domain)] <- "d:unidentified"
